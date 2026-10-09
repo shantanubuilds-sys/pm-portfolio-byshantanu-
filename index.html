@@ -1,1 +1,1260 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101010" />
+  <meta name="description" content="Shantanu Daberao is an Electrical Engineering student building product management, AI, and technology projects." />
+  <meta property="og:title" content="Shantanu Daberao | Product & Technology" />
+  <meta property="og:description" content="An engineering student exploring product thinking, AI, and human-centered technology." />
+  <meta property="og:type" content="website" />
+  <title>Shantanu Daberao | Product & Technology</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101010;
+      --bg-soft: #151515;
+      --panel: #191919;
+      --panel-hover: #202020;
+      --text: #f5f5f5;
+      --muted: #a1a1a6;
+      --line: rgba(255,255,255,.11);
+      --accent: #ffffff;
+      --accent-soft: rgba(255,255,255,.07);
+      --green: #a8e6c0;
+      --radius: 22px;
+      --max: 1160px;
+      --ease: cubic-bezier(.2,.75,.25,1);
+      --shadow: 0 24px 80px rgba(0,0,0,.24);
+    }
+
+    [data-theme="light"] {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --bg-soft: #ffffff;
+      --panel: #ffffff;
+      --panel-hover: #ededf0;
+      --text: #18181b;
+      --muted: #66666f;
+      --line: rgba(0,0,0,.12);
+      --accent: #171717;
+      --accent-soft: rgba(0,0,0,.045);
+      --green: #17683c;
+      --shadow: 0 24px 80px rgba(0,0,0,.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      letter-spacing: -.01em;
+      overflow-x: hidden;
+      transition: background .35s, color .35s;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(255,255,255,.055), transparent 40%),
+        radial-gradient(ellipse at 0% 45%, rgba(255,255,255,.025), transparent 35%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 4px;
+    }
+    img { display: block; max-width: 100%; }
+    ::selection { background: var(--text); color: var(--bg); }
+
+    .container { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+    .muted { color: var(--muted); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--muted); text-transform: uppercase;
+      font-size: .72rem; font-weight: 650; letter-spacing: .16em;
+    }
+    .eyebrow::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--text); box-shadow: 0 0 14px rgba(255,255,255,.3);
+    }
+    .section { padding: 108px 0; }
+    .section-heading {
+      display: flex; align-items: end; justify-content: space-between;
+      gap: 28px; margin-bottom: 38px;
+    }
+    .section-heading h2 {
+      margin: 12px 0 0; font-size: clamp(2rem, 4.5vw, 3.35rem);
+      letter-spacing: -.065em; line-height: 1.08; font-weight: 620;
+    }
+    .section-heading > p { max-width: 390px; color: var(--muted); margin: 0; }
+    .gradient-text {
+      background: linear-gradient(110deg, var(--text) 15%, #9b9ba2 80%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* Navigation */
+    .nav-wrap {
+      position: fixed; z-index: 50; inset: 0 0 auto;
+      padding: 14px 0;
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, padding .3s;
+    }
+    .nav-wrap.scrolled { border-color: var(--line); padding: 10px 0; }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 720; letter-spacing: -.035em; }
+    .brand-mark {
+      width: 32px; height: 32px; display: grid; place-items: center;
+      border: 1px solid var(--line); border-radius: 11px;
+      background: var(--accent-soft); font-size: .8rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 27px; }
+    .nav-links a, .nav-action {
+      color: var(--muted); font-size: .83rem; transition: color .2s;
+    }
+    .nav-links a:hover, .nav-action:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .icon-button {
+      width: 38px; height: 38px; border: 1px solid var(--line);
+      background: var(--accent-soft); border-radius: 50%;
+      display: grid; place-items: center; cursor: pointer;
+      transition: transform .25s, background .25s;
+    }
+    .icon-button:hover { transform: rotate(-8deg); background: var(--panel-hover); }
+    .menu-button { display: none; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 46px; padding: 0 19px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--text); color: var(--bg);
+      font-size: .84rem; font-weight: 680; cursor: pointer;
+      transition: transform .25s var(--ease), opacity .25s, box-shadow .25s;
+    }
+    .button:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .button.secondary { background: transparent; color: var(--text); }
+    .button.small { min-height: 38px; padding: 0 14px; font-size: .78rem; }
+
+    /* Hero */
+    .hero { padding: 176px 0 80px; min-height: 92vh; display: flex; align-items: center; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: center; }
+    .hero h1 {
+      margin: 20px 0 22px; max-width: 780px;
+      font-size: clamp(3.1rem, 7.4vw, 6.6rem);
+      line-height: .98; letter-spacing: -.085em; font-weight: 650;
+    }
+    .hero h1 .line { display: block; }
+    .hero-copy { max-width: 560px; color: var(--muted); font-size: 1.08rem; }
+    .hero-copy strong { color: var(--text); font-weight: 570; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .social-row { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 32px; }
+    .social-row a { color: var(--muted); font-size: .82rem; }
+    .social-row a:hover { color: var(--text); }
+
+    .visual-shell {
+      position: relative; min-height: 420px; border: 1px solid var(--line);
+      border-radius: 30px; padding: 24px; overflow: hidden;
+      background: linear-gradient(145deg, var(--panel), var(--bg-soft));
+      box-shadow: var(--shadow);
+      transform-style: preserve-3d;
+    }
+    .visual-shell::before {
+      content: ""; position: absolute; width: 290px; height: 290px;
+      top: -100px; right: -70px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.14), transparent 70%);
+      filter: blur(10px); animation: orb 8s ease-in-out infinite alternate;
+    }
+    .visual-top { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: .75rem; }
+    .visual-dots { display: flex; gap: 5px; }
+    .visual-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); opacity: .6; }
+    .flow { position: relative; z-index: 1; display: grid; gap: 10px; margin-top: 35px; }
+    .flow-node {
+      display: flex; align-items: center; gap: 13px; padding: 13px 15px;
+      border: 1px solid var(--line); border-radius: 14px;
+      background: color-mix(in srgb, var(--panel) 82%, transparent);
+      animation: float-in .75s var(--ease) both;
+    }
+    .flow-node:nth-child(2) { animation-delay: .12s; }
+    .flow-node:nth-child(3) { animation-delay: .24s; }
+    .flow-node:nth-child(4) { animation-delay: .36s; }
+    .flow-node:nth-child(5) { animation-delay: .48s; }
+    .flow-number {
+      width: 30px; height: 30px; flex-shrink: 0; display: grid; place-items: center;
+      border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: .72rem;
+    }
+    .flow-node strong { display: block; font-size: .88rem; font-weight: 600; }
+    .flow-node small { color: var(--muted); font-size: .73rem; }
+    .flow-arrow { color: var(--muted); text-align: center; line-height: .7; font-size: .9rem; }
+    .visual-foot { display: flex; justify-content: space-between; margin-top: 22px; font-size: .72rem; color: var(--muted); }
+
+    /* Stats and cards */
+    .signal-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--accent-soft); overflow: hidden;
+    }
+    .signal { padding: 25px 22px; border-right: 1px solid var(--line); }
+    .signal:last-child { border: 0; }
+    .signal strong { display: block; font-size: 1.1rem; letter-spacing: -.035em; }
+    .signal span { display: block; color: var(--muted); font-size: .78rem; margin-top: 3px; }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+    .filter {
+      border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px;
+      color: var(--muted); background: transparent; cursor: pointer; font-size: .78rem;
+      transition: all .2s;
+    }
+    .filter:hover, .filter.active { color: var(--bg); background: var(--text); border-color: var(--text); }
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project-card {
+      min-width: 0; overflow: hidden; border: 1px solid var(--line);
+      border-radius: var(--radius); background: var(--panel);
+      transition: transform .4s var(--ease), border-color .3s, box-shadow .4s;
+    }
+    .project-card:hover { transform: translateY(-7px); border-color: rgba(255,255,255,.28); box-shadow: var(--shadow); }
+    .project-art {
+      position: relative; height: 215px; overflow: hidden; padding: 23px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #202020, #111111);
+      border-bottom: 1px solid var(--line);
+    }
+    .project-art::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.12), transparent 60%);
+      pointer-events: none;
+    }
+    .art-label { position: absolute; z-index: 2; top: 18px; left: 20px; color: #a6a6aa; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+    .art-index { position: absolute; z-index: 2; bottom: 17px; right: 20px; color: #a6a6aa; font-size: .7rem; }
+    .orbit {
+      width: 136px; height: 136px; border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%; position: relative; animation: orbit-spin 16s linear infinite;
+    }
+    .orbit::before, .orbit::after {
+      content: ""; position: absolute; border: 1px solid rgba(255,255,255,.2); border-radius: 50%;
+    }
+    .orbit::before { inset: 17px; }
+    .orbit::after { inset: 38px; }
+    .orbit-core {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 30px; height: 30px; border-radius: 50%; background: #f5f5f5;
+      box-shadow: 0 0 35px rgba(255,255,255,.25);
+    }
+    .art-word {
+      color: #f5f5f5; font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: -.09em; font-weight: 700; position: relative; z-index: 1;
+    }
+    .art-bars { display: flex; gap: 7px; align-items: center; height: 90px; }
+    .art-bars i {
+      display: block; width: 8px; border-radius: 99px; background: #f5f5f5;
+      animation: equalize .8s ease-in-out infinite alternate;
+    }
+    .art-bars i:nth-child(3n) { animation-delay: -.4s; }
+    .art-bars i:nth-child(2n) { animation-delay: -.7s; }
+    .art-bars i:nth-child(1) { height: 30px; }
+    .art-bars i:nth-child(2) { height: 55px; }
+    .art-bars i:nth-child(3) { height: 77px; }
+    .art-bars i:nth-child(4) { height: 43px; }
+    .art-bars i:nth-child(5) { height: 68px; }
+    .art-bars i:nth-child(6) { height: 35px; }
+    .art-bars i:nth-child(7) { height: 58px; }
+    .project-body { padding: 23px; }
+    .project-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .project-kind { color: var(--muted); font-size: .72rem; }
+    .status {
+      border: 1px solid var(--line); border-radius: 999px; padding: 4px 8px;
+      font-size: .66rem; color: var(--muted); white-space: nowrap;
+    }
+    .status.prototype { color: var(--green); border-color: color-mix(in srgb, var(--green) 30%, transparent); }
+    .project-body h3 { margin: 16px 0 8px; font-size: 1.42rem; letter-spacing: -.045em; }
+    .project-body p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .tag {
+      border: 1px solid var(--line); border-radius: 7px; padding: 4px 8px;
+      font-size: .69rem; color: var(--muted);
+    }
+    .project-bottom { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 22px; }
+    .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 620; }
+    .text-link span { transition: transform .25s; }
+    .text-link:hover span { transform: translateX(4px); }
+
+    /* About and skills */
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 65px; align-items: start; }
+    .profile-card {
+      border: 1px solid var(--line); border-radius: 26px; padding: 26px;
+      background: var(--panel); position: relative; overflow: hidden;
+    }
+    .avatar {
+      width: 108px; height: 108px; border: 1px solid var(--line);
+      border-radius: 32px; display: grid; place-items: center;
+      font-size: 2rem; font-weight: 650; letter-spacing: -.08em;
+      background: linear-gradient(145deg, #333, #151515); color: #fff;
+      margin-bottom: 24px;
+    }
+    .profile-card h3 { font-size: 1.4rem; letter-spacing: -.04em; margin: 0 0 5px; }
+    .profile-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .profile-status { display: flex; align-items: center; gap: 9px; margin-top: 22px; font-size: .78rem; color: var(--muted); }
+    .status-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; box-shadow: 0 0 12px color-mix(in srgb, var(--green) 50%, transparent); }
+    .about-copy h3 { margin: 0 0 16px; font-size: 1.9rem; letter-spacing: -.05em; line-height: 1.2; }
+    .about-copy p { color: var(--muted); margin: 0 0 16px; }
+    .thinking-flow {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
+      padding: 17px; margin-top: 27px; border: 1px solid var(--line);
+      border-radius: 15px; background: var(--accent-soft);
+    }
+    .thinking-flow span { font-size: .77rem; }
+    .thinking-flow b { color: var(--muted); font-weight: 400; }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .skill-card {
+      border: 1px solid var(--line); border-radius: 18px; padding: 22px;
+      background: var(--panel); transition: transform .3s, border-color .3s;
+    }
+    .skill-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.25); }
+    .skill-icon { font-size: 1.2rem; margin-bottom: 18px; }
+    .skill-card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .skill-card p { margin: 0; font-size: .8rem; color: var(--muted); }
+    .skill-card .tag-row { margin-top: 14px; }
+
+    /* Timeline */
+    .timeline { border-top: 1px solid var(--line); }
+    .timeline-item {
+      display: grid; grid-template-columns: 160px 1fr; gap: 30px;
+      padding: 26px 0; border-bottom: 1px solid var(--line);
+    }
+    .timeline-date { color: var(--muted); font-size: .8rem; }
+    .timeline-item h3 { margin: 0 0 6px; font-size: 1.08rem; }
+    .timeline-item p { margin: 0; color: var(--muted); font-size: .88rem; max-width: 680px; }
+
+    /* Contact and footer */
+    .contact-panel {
+      border: 1px solid var(--line); border-radius: 28px; padding: clamp(28px, 6vw, 65px);
+      background: linear-gradient(145deg, var(--panel), var(--bg-soft));
+      position: relative; overflow: hidden;
+    }
+    .contact-panel::after {
+      content: ""; position: absolute; width: 300px; height: 300px; right: -100px; bottom: -180px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
+      pointer-events: none;
+    }
+    .contact-panel h2 { max-width: 720px; margin: 16px 0; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -.075em; line-height: 1; }
+    .contact-panel p { color: var(--muted); max-width: 520px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+    footer { padding: 30px 0 40px; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-row p { color: var(--muted); font-size: .76rem; margin: 0; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 17px; }
+    .footer-links a { color: var(--muted); font-size: .76rem; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* Project detail views */
+    .detail-page { min-height: 75vh; padding: 145px 0 90px; }
+    .back-link { display: inline-flex; gap: 9px; color: var(--muted); font-size: .82rem; margin-bottom: 35px; }
+    .back-link:hover { color: var(--text); }
+    .detail-hero { max-width: 880px; margin-bottom: 45px; }
+    .detail-hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.8rem); line-height: 1;
+      letter-spacing: -.08em; margin: 18px 0;
+    }
+    .detail-hero > p { color: var(--muted); font-size: 1.08rem; max-width: 720px; }
+    .detail-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+    .detail-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, .6fr); gap: 20px; }
+    .detail-main, .detail-aside { display: grid; gap: 17px; align-content: start; }
+    .detail-block, .detail-aside-card {
+      border: 1px solid var(--line); border-radius: 19px; background: var(--panel); padding: 24px;
+    }
+    .detail-block h2 { font-size: 1.17rem; letter-spacing: -.04em; margin: 0 0 12px; }
+    .detail-block p, .detail-block li { color: var(--muted); font-size: .88rem; }
+    .detail-block p { margin: 0 0 10px; }
+    .detail-block ul, .detail-block ol { padding-left: 19px; margin: 10px 0 0; }
+    .detail-block li { padding: 3px 0; }
+    .detail-aside-card h3 { margin: 0 0 12px; font-size: .92rem; }
+    .detail-aside-card p { color: var(--muted); font-size: .82rem; margin: 0 0 12px; }
+    .detail-aside-card .button { width: 100%; margin-top: 8px; }
+    .notice {
+      border-left: 2px solid var(--text); padding: 12px 14px;
+      background: var(--accent-soft); border-radius: 0 10px 10px 0;
+      font-size: .82rem; color: var(--muted);
+    }
+    .detail-footer { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 35px; }
+
+    /* Command menu */
+    .command-overlay {
+      position: fixed; inset: 0; z-index: 100; display: none; place-items: start center;
+      padding: 16vh 18px 20px; background: rgba(0,0,0,.64); backdrop-filter: blur(10px);
+    }
+    .command-overlay.open { display: grid; animation: fade-in .18s ease both; }
+    .command-box {
+      width: min(520px, 100%); border: 1px solid var(--line); border-radius: 20px;
+      background: var(--panel); overflow: hidden; box-shadow: var(--shadow);
+    }
+    .command-box input { width: 100%; border: 0; border-bottom: 1px solid var(--line); padding: 18px; background: transparent; color: var(--text); outline: 0; }
+    .command-list { padding: 8px; }
+    .command-list button {
+      width: 100%; text-align: left; border: 0; border-radius: 10px; padding: 12px;
+      background: transparent; cursor: pointer; color: var(--muted);
+    }
+    .command-list button:hover { background: var(--accent-soft); color: var(--text); }
+    .command-hint { padding: 10px 16px; color: var(--muted); font-size: .7rem; border-top: 1px solid var(--line); }
+
+    /* Motion */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .hidden { display: none !important; }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes float-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes orbit-spin { to { transform: rotate(360deg); } }
+    @keyframes equalize { from { transform: scaleY(.55); } to { transform: scaleY(1); } }
+    @keyframes orb { from { transform: translate(0,0); } to { transform: translate(-35px,35px); } }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 42px; }
+      .visual-shell { min-height: auto; }
+      .hero { min-height: auto; padding-top: 145px; }
+      .about-grid { grid-template-columns: 1fr; gap: 28px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .detail-grid { grid-template-columns: 1fr; }
+      .signal { padding: 20px 14px; }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 30px, var(--max)); }
+      .section { padding: 76px 0; }
+      .section-heading { align-items: start; flex-direction: column; gap: 15px; }
+      .nav-links {
+        display: none; position: absolute; top: 62px; left: 15px; right: 15px;
+        padding: 17px; border: 1px solid var(--line); border-radius: 17px;
+        background: var(--panel); box-shadow: var(--shadow);
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 8px; }
+      .menu-button { display: grid; }
+      .nav-right .nav-action { display: none; }
+      .hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
+      .hero-copy { font-size: .98rem; }
+      .visual-shell { padding: 17px; border-radius: 22px; }
+      .flow-node { padding: 10px 12px; }
+      .signal-bar { grid-template-columns: repeat(2, 1fr); }
+      .signal:nth-child(2) { border-right: 0; }
+      .signal:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-art { height: 190px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 7px; }
+      .footer-row { flex-direction: column; align-items: start; }
+      .detail-page { padding-top: 120px; }
+      .detail-block, .detail-aside-card { padding: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important; transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav-wrap" id="navWrap">
+    <nav class="container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Shantanu Daberao home">
+        <span class="brand-mark">SD.</span>
+        <span>Shantanu Daberao</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#skills">Toolkit</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-right">
+        <a class="nav-action" href="https://www.linkedin.com/in/shantanu-daberao-633551348/" target="_blank" rel="noopener noreferrer">Let's connect ↗</a>
+        <button class="icon-button" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">☼</button>
+        <button class="icon-button" id="commandOpen" aria-label="Open command menu" title="Command menu">⌘</button>
+        <button class="icon-button menu-button" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- Home page -->
+    <div id="homePage">
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Engineering · Product · AI</span>
+            <h1>
+              <span class="line">Building with</span>
+              <span class="line gradient-text">curiosity.</span>
+            </h1>
+            <p class="hero-copy">
+              I'm <strong>Shantanu Daberao</strong>, an Electrical Engineering student
+              building toward a career in Product Management. I explore how thoughtful
+              product decisions, AI, and technology can turn messy problems into
+              clearer experiences.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#work">Explore my work <span>↗</span></a>
+              <a class="button secondary" href="#about">A little about me</a>
+            </div>
+            <div class="social-row" aria-label="Social links">
+              <a href="https://github.com/shantanubuilds-sys" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/shantanu-daberao-633551348/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a href="mailto:shantanudaberao36@gmail.com">Email ↗</a>
+              <a href="https://discord.gg/B4CrtkkQ" target="_blank" rel="noopener noreferrer">Discord ↗</a>
+            </div>
+          </div>
+
+          <div class="visual-shell" id="heroVisual" aria-label="Interactive product thinking flow">
+            <div class="visual-top">
+              <span>MY PRODUCT THINKING</span>
+              <span class="visual-dots"><i></i><i></i><i></i></span>
+            </div>
+            <div class="flow">
+              <div class="flow-node"><span class="flow-number">01</span><div><strong>Understand the problem</strong><small>Who needs help, and why?</small></div></div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node"><span class="flow-number">02</span><div><strong>Explore the opportunity</strong><small>Evidence before assumptions</small></div></div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node"><span class="flow-number">03</span><div><strong>Build a focused MVP</strong><small>Make trade-offs explicit</small></div></div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node"><span class="flow-number">04</span><div><strong>Measure and learn</strong><small>Outcomes over feature counts</small></div></div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node"><span class="flow-number">05</span><div><strong>Iterate with evidence</strong><small>Every version teaches something</small></div></div>
+            </div>
+            <div class="visual-foot"><span>Product is a learning loop.</span><span>01 / 05</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container reveal" aria-label="Portfolio overview">
+        <div class="signal-bar">
+          <div class="signal"><strong>04</strong><span>Projects documented</span></div>
+          <div class="signal"><strong>AI + UX</strong><span>Areas explored</span></div>
+          <div class="signal"><strong>0 → 1</strong><span>Concepts to prototypes</span></div>
+          <div class="signal"><strong>Learning</strong><span>Evidence-led mindset</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="work">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><span class="eyebrow">Selected work</span><h2>Ideas, made tangible.</h2></div>
+            <p>A collection of product concepts, case studies, and experiments. Each one includes what I considered, what remains uncertain, and what I'd test next.</p>
+          </div>
+
+          <div class="filters reveal" aria-label="Filter projects">
+            <button class="filter active" data-filter="all">All work</button>
+            <button class="filter" data-filter="ai">AI products</button>
+            <button class="filter" data-filter="product">Product strategy</button>
+            <button class="filter" data-filter="ux">UX & discovery</button>
+            <button class="filter" data-filter="prompt">Prompt design</button>
+          </div>
+
+          <div class="project-grid" id="projectGrid">
+            <article class="project-card reveal" data-categories="ai product">
+              <a href="#project/hire-mate" aria-label="Open Hire Mate case study">
+                <div class="project-art">
+                  <span class="art-label">AI product concept</span>
+                  <div class="orbit"><div class="orbit-core"></div></div>
+                  <span class="art-index">PROJECT / 01</span>
+                </div>
+              </a>
+              <div class="project-body">
+                <div class="project-meta"><span class="project-kind">Interview preparation</span><span class="status prototype">Clickable prototype</span></div>
+                <h3>Hire Mate</h3>
+                <p>An AI interview-coaching concept built around practice, structured feedback, follow-up questions, and a personalized next step.</p>
+                <div class="tag-row"><span class="tag">AI evaluation</span><span class="tag">MVP design</span><span class="tag">Learning metrics</span></div>
+                <div class="project-bottom">
+                  <a class="text-link" href="#project/hire-mate">Explore case study <span>→</span></a>
+                  <a class="text-link" href="https://ai.studio/apps/af0c5530-f92d-4059-9388-571da697a4a7" target="_blank" rel="noopener noreferrer" aria-label="Open Hire Mate prototype">Prototype ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-categories="ai product">
+              <a href="#project/tripwise-ai" aria-label="Open TripWise AI case study">
+                <div class="project-art">
+                  <span class="art-label">AI decision support</span>
+                  <div class="art-word">tripwise<span style="opacity:.45">.</span></div>
+                  <span class="art-index">PROJECT / 02</span>
+                </div>
+              </a>
+              <div class="project-body">
+                <div class="project-meta"><span class="project-kind">Travel planning</span><span class="status">Concept</span></div>
+                <h3>TripWise AI</h3>
+                <p>A travel-planning concept exploring whether natural-language constraints and clear explanations can make comparing options easier.</p>
+                <div class="tag-row"><span class="tag">AI guardrails</span><span class="tag">Decision quality</span><span class="tag">Experiment design</span></div>
+                <div class="project-bottom">
+                  <a class="text-link" href="#project/tripwise-ai">Explore case study <span>→</span></a>
+                  <a class="text-link" href="https://docs.google.com/document/d/1j_yy1lrQBXyrDA3TnHtb2afkFq9d2o4QT-IKmQBLDrA/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Original doc ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-categories="product ux">
+              <a href="#project/spotify-social" aria-label="Open Spotify Social and UX case study">
+                <div class="project-art">
+                  <span class="art-label">Product exploration</span>
+                  <div class="art-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <span class="art-index">PROJECT / 03</span>
+                </div>
+              </a>
+              <div class="project-body">
+                <div class="project-meta"><span class="project-kind">Music experience</span><span class="status">Early exploration</span></div>
+                <h3>Spotify: Social & UX</h3>
+                <p>Exploring social music discovery, QR connections, collaborative listening, artist updates, and free-tier friction.</p>
+                <div class="tag-row"><span class="tag">Feature ideation</span><span class="tag">UX friction</span><span class="tag">Prioritization</span></div>
+                <div class="project-bottom">
+                  <a class="text-link" href="#project/spotify-social">Explore case study <span>→</span></a>
+                  <a class="text-link" href="https://docs.google.com/document/d/1SkccBAL9BdJ3V3l-eOD3W3DEAXOs1MP5p5_QQCveCbs/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Original doc ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-categories="ux prompt">
+              <a href="#project/spotify-storybook" aria-label="Open Spotify UI UX Storybook experiment">
+                <div class="project-art">
+                  <span class="art-label">Prompt experiment</span>
+                  <div class="art-word" style="font-weight:450">story<span style="font-weight:750">book</span></div>
+                  <span class="art-index">PROJECT / 04</span>
+                </div>
+              </a>
+              <div class="project-body">
+                <div class="project-meta"><span class="project-kind">UX storytelling</span><span class="status">Prompt experiment</span></div>
+                <h3>Spotify UI/UX Storybook</h3>
+                <p>A reusable prompt concept for drafting illustrative user stories from a product, persona, and location brief.</p>
+                <div class="tag-row"><span class="tag">Prompt design</span><span class="tag">Personas</span><span class="tag">UX exploration</span></div>
+                <div class="project-bottom">
+                  <a class="text-link" href="#project/spotify-storybook">Explore experiment <span>→</span></a>
+                  <a class="text-link" href="https://docs.google.com/document/d/1n9K4rzBDKHeVfnT46oakQSsyb3XWatIeLqnQsW2XS2s/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Original doc ↗</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><span class="eyebrow">A little context</span><h2>Engineer by education.<br>Product thinker by direction.</h2></div>
+          </div>
+          <div class="about-grid">
+            <div class="profile-card reveal">
+              <!-- Replace this initials block with your photo when ready.
+                   Add your image to assets/profile.jpg and replace this div with:
+                   <img class="avatar" src="assets/profile.jpg" alt="Shantanu Daberao" />
+              -->
+              <div class="avatar" aria-label="Profile photo placeholder">SD</div>
+              <h3>Shantanu Daberao</h3>
+              <p>Electrical Engineering student · Aspiring Product Manager</p>
+              <div class="profile-status"><span class="status-dot"></span> Learning, building, and documenting the process</div>
+            </div>
+            <div class="about-copy reveal">
+              <h3>I want to understand not just how a product works, but <span class="gradient-text">why it should exist.</span></h3>
+              <p>My engineering studies give me a foundation for understanding technical systems. Through product concepts and AI experiments, I'm learning to connect that technical perspective with user problems, prioritization, product decisions, and measurement.</p>
+              <p>This portfolio is a working record of that journey. Some work is at prototype stage, some is early exploration, and some is a prompt experiment. I try to make the evidence and the gaps visible rather than dressing assumptions up as results.</p>
+              <div class="thinking-flow" aria-label="Product process">
+                <span>Problem</span><b>→</b><span>Discovery</span><b>→</b><span>Decisions</span><b>→</b><span>MVP</span><b>→</b><span>Learning</span>
+              </div>
+              <div class="hero-actions">
+                <a class="button secondary" href="https://github.com/shantanubuilds-sys" target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a>
+                <a class="button secondary" href="https://www.linkedin.com/in/shantanu-daberao-633551348/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><span class="eyebrow">Learning toolkit</span><h2>Skills I'm developing.</h2></div>
+            <p>This is a learning map, not a claim of expert-level proficiency. I'll update it as I build, test, and learn.</p>
+          </div>
+          <div class="skills-grid">
+            <article class="skill-card reveal"><div class="skill-icon">⌘</div><h3>Product thinking</h3><p>Turning a broad idea into a clear problem, a focused MVP, and a testable plan.</p><div class="tag-row"><span class="tag">JTBD</span><span class="tag">PRDs</span><span class="tag">Prioritization</span></div></article>
+            <article class="skill-card reveal"><div class="skill-icon">✳</div><h3>AI product design</h3><p>Exploring where AI helps, how to evaluate its output, and how to design honest guardrails.</p><div class="tag-row"><span class="tag">Prompting</span><span class="tag">RAG concepts</span><span class="tag">Evaluation</span></div></article>
+            <article class="skill-card reveal"><div class="skill-icon">◎</div><h3>UX & discovery</h3><p>Identifying friction, making assumptions explicit, and planning user research before scaling ideas.</p><div class="tag-row"><span class="tag">Personas</span><span class="tag">User stories</span><span class="tag">Usability</span></div></article>
+            <article class="skill-card reveal"><div class="skill-icon">⌘</div><h3>Web building</h3><p>Creating small, interactive experiences and learning through working prototypes.</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></article>
+            <article class="skill-card reveal"><div class="skill-icon">↗</div><h3>Measurement</h3><p>Defining useful indicators and distinguishing proposed targets from measured results.</p><div class="tag-row"><span class="tag">North Star</span><span class="tag">Funnels</span><span class="tag">Experiments</span></div></article>
+            <article class="skill-card reveal"><div class="skill-icon">⌁</div><h3>Currently learning</h3><p>Building stronger foundations in C, product case studies, AI product evaluation, and Japanese.</p><div class="tag-row"><span class="tag">C language</span><span class="tag">PM practice</span><span class="tag">Japanese</span></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="journey">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><span class="eyebrow">The journey</span><h2>Learning in public.</h2></div>
+            <p>A timeline of the direction I'm exploring. Dates can be refined as more milestones are added.</p>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item reveal"><div class="timeline-date">Engineering studies</div><div><h3>Building a technical foundation</h3><p>Studying Electrical Engineering while developing programming skills and exploring how software and technical systems are designed.</p></div></article>
+            <article class="timeline-item reveal"><div class="timeline-date">Product learning</div><div><h3>Learning Product Management with Applied AI</h3><p>Exploring product discovery, problem framing, prioritization, product strategy, AI concepts, and evaluation.</p></div></article>
+            <article class="timeline-item reveal"><div class="timeline-date">Project building</div><div><h3>Turning ideas into artifacts</h3><p>Creating Hire Mate, TripWise AI, Spotify product explorations, and a reusable UX storytelling prompt experiment.</p></div></article>
+            <article class="timeline-item reveal"><div class="timeline-date">Next chapter</div><div><h3>Validate, measure, improve</h3><p>Conduct user interviews, test prototypes, compare assumptions against evidence, and strengthen the portfolio with documented learning.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="contact-panel reveal">
+            <span class="eyebrow">Open to conversations</span>
+            <h2>Have a product problem worth thinking through?</h2>
+            <p>I'm interested in conversations about Product Management, AI, UX, engineering, and building useful things. The best way to reach me is by email or LinkedIn.</p>
+            <div class="contact-links">
+              <a class="button" href="mailto:shantanudaberao36@gmail.com">Start a conversation ↗</a>
+              <a class="button secondary" href="https://www.linkedin.com/in/shantanu-daberao-633551348/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a class="button secondary" href="https://github.com/shantanubuilds-sys" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a class="button secondary" href="https://discord.gg/B4CrtkkQ" target="_blank" rel="noopener noreferrer">Discord ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Project detail views are rendered here by JavaScript. -->
+    <div id="projectPage" class="hidden"></div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>© <span id="year"></span> Shantanu Daberao. Built with curiosity and iteration.</p>
+      <div class="footer-links">
+        <a href="https://github.com/shantanubuilds-sys" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/shantanu-daberao-633551348/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:shantanudaberao36@gmail.com">Email</a>
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="command-overlay" id="commandOverlay" role="dialog" aria-modal="true" aria-label="Quick navigation">
+    <div class="command-box">
+      <input id="commandInput" type="text" placeholder="Where would you like to go?" aria-label="Search navigation commands" />
+      <div class="command-list" id="commandList">
+        <button data-go="#work">View projects</button>
+        <button data-go="#about">About Shantanu</button>
+        <button data-go="#skills">Skills and toolkit</button>
+        <button data-go="#journey">Learning journey</button>
+        <button data-go="#contact">Contact</button>
+        <button data-go="#project/hire-mate">Hire Mate case study</button>
+        <button data-go="#project/tripwise-ai">TripWise AI case study</button>
+        <button data-go="#project/spotify-social">Spotify Social & UX case study</button>
+        <button data-go="#project/spotify-storybook">Spotify Storybook experiment</button>
+      </div>
+      <div class="command-hint">Press Esc to close · Use ⌘K or Ctrl+K to open</div>
+    </div>
+  </div>
+
+  <script>
+    const LINKS = {
+      github: "https://github.com/shantanubuilds-sys",
+      linkedin: "https://www.linkedin.com/in/shantanu-daberao-633551348/",
+      email: "mailto:shantanudaberao36@gmail.com",
+      discord: "https://discord.gg/B4CrtkkQ",
+      hireMateDoc: "https://docs.google.com/document/d/1Unv9sxYpSuajvLZaZPoIo4H2wxlFb2Az93KJ8n4rZpw/edit?usp=sharing",
+      spotifyDoc: "https://docs.google.com/document/d/1SkccBAL9BdJ3V3l-eOD3W3DEAXOs1MP5p5_QQCveCbs/edit?usp=sharing",
+      tripwiseDoc: "https://docs.google.com/document/d/1j_yy1lrQBXyrDA3TnHtb2afkFq9d2o4QT-IKmQBLDrA/edit?usp=sharing",
+      storybookDoc: "https://docs.google.com/document/d/1n9K4rzBDKHeVfnT46oakQSsyb3XWatIeLqnQsW2XS2s/edit?usp=sharing",
+      hireMateDemo: "https://ai.studio/apps/af0c5530-f92d-4059-9388-571da697a4a7"
+    };
+
+    // All project details live in one place so updates are easier.
+    const PROJECTS = {
+      "hire-mate": {
+        number: "01", title: "Hire Mate",
+        category: "AI product · Interview preparation",
+        status: "Clickable prototype",
+        tagline: "Designing an AI coach that helps aspiring Product Managers understand what to practice next, and why.",
+        summary: "Hire Mate explores a feedback-rich interview practice loop for students and freshers preparing for Product Management interviews. The idea is to move beyond a static question bank toward structured evaluation, follow-up questions, and targeted practice.",
+        problem: "PM interviews test reasoning, prioritization, trade-offs, and communication. A question list can help someone see examples, but it doesn't necessarily show how their own reasoning holds up or what they should improve next. These are working hypotheses that still need user research.",
+        users: "Primary: college students and freshers applying for PM internships or product roles. The prototype persona is an aspiring PM studying Electrical Engineering, with limited access to formal PM mentorship.",
+        hypothesis: "If aspiring PMs practice through a structured interview loop with specific, explainable feedback, they may identify weaknesses and choose more relevant practice than they would using a question list alone.",
+        decisions: [
+          ["Focus on PM first", "Prioritize depth of feedback over launching many career tracks at once. Trade-off: a smaller initial audience."],
+          ["Evaluate reasoning, not keywords", "Use a framework-aware approach rather than requiring candidates to name a particular framework. Trade-off: evaluation is harder to keep consistent."],
+          ["Separate Practice and Mock modes", "Practice can give feedback after each answer; Mock can delay feedback until the end. Trade-off: two distinct flows need design and testing."],
+          ["Suggest structure, not a memorized answer", "Help candidates improve their reasoning rather than simply hand over a model answer. Trade-off: some users may still want an example answer."]
+        ],
+        solution: [
+          "Choose an interview type, difficulty, length, and mode.",
+          "Answer questions using text or the prototype's voice-oriented interface.",
+          "Review a score, a five-dimension breakdown, strengths, improvement areas, a challenge question, and a suggested answer structure.",
+          "Complete the interview, review category performance, and choose a weaker area for targeted practice.",
+          "Use a proposed five-day practice plan to organize the next steps."
+        ],
+        risks: [
+          "Inconsistent AI scoring could undermine trust. The rubric needs calibration against human reviewers.",
+          "A high demo score must not be presented as proof of real interview readiness.",
+          "Speech transcription errors could unfairly affect an answer's evaluation.",
+          "Company-style questions must be clearly labelled as simulations, not official interview questions.",
+          "Repeated practice should not teach only one narrow style of answering."
+        ],
+        metrics: [
+          "Interview completion rate",
+          "Feedback usefulness rating",
+          "Share of sessions starting from a recommended weak area",
+          "Score change within the same category over repeated attempts",
+          "Weekly returning users and practice streaks"
+        ],
+        next: [
+          "Interview 8–10 PM aspirants to test whether the problem is strong and how they prepare today.",
+          "Run a usability test with five students and observe where they get stuck.",
+          "Define explicit criteria for each score level.",
+          "Compare feedback from a real model with feedback from a human PM reviewing the same answers.",
+          "Only expand to other career tracks after the core loop has been tested."
+        ],
+        evidence: "This is a prototype. Its dashboard numbers are demo data, and the AI feedback is simulated. It has not established real-user validation, score improvement, or better interview outcomes.",
+        skills: ["Problem framing", "MVP scope", "AI evaluation", "Feedback design", "Proposed success metrics"],
+        source: LINKS.hireMateDoc, live: LINKS.hireMateDemo, liveLabel: "Open Hire Mate prototype ↗"
+      },
+
+      "tripwise-ai": {
+        number: "02", title: "TripWise AI",
+        category: "AI product · Travel decision support",
+        status: "Concept and evaluation plan",
+        tagline: "Could conversational AI help travelers make a better decision than a well-designed set of filters?",
+        summary: "TripWise AI explores a travel-planning experience that takes natural-language constraints, compares suitable options, and explains trade-offs. The central product question is whether conversation improves decision quality or simply adds another layer of interaction.",
+        problem: "Travelers may need to balance budget, timing, preferences, convenience, and quality across multiple options. The concept assumes that expressing these constraints conversationally could reduce decision effort, but that assumption requires comparison against a good conventional filter interface.",
+        users: "Travelers trying to compare options against a combination of constraints and preferences. Specific user segments and their priorities still need research.",
+        hypothesis: "If a travel assistant extracts hard constraints reliably and explains grounded trade-offs, users may reach a suitable choice with less effort than when using a conventional filter-and-sort interface.",
+        decisions: [
+          ["Hard constraints before preferences", "Treat must-haves differently from softer preferences so a highly rated but unsuitable option doesn't win by default."],
+          ["Explain recommendations", "Show why an option fits rather than displaying a ranking without context. Trade-off: explanations can sound confident even when unsupported."],
+          ["Avoid fabricated live information", "Use controlled or synthetic data for a demo rather than claiming live price, availability, or booking accuracy."],
+          ["Compare against a non-AI alternative", "A guided form or visual filters may solve the same problem with less latency and complexity. The conversational layer needs to prove its value."]
+        ],
+        solution: [
+          "Collect a travel request in natural language.",
+          "Extract destination, dates, budget, and other constraints.",
+          "Allow users to inspect or correct misunderstood constraints.",
+          "Rank candidate options using hard constraints first, followed by preferences and convenience.",
+          "Explain trade-offs using only information supported by the available data."
+        ],
+        risks: [
+          "An LLM explanation may drift beyond the data and make unsupported claims.",
+          "A misunderstood constraint needs a clear correction and fallback path.",
+          "Synthetic-data clicks measure demo interaction, not actual booking intent.",
+          "Real inventory, price changes, API cost, and latency remain unresolved execution risks.",
+          "A sharing-based growth loop is only a hypothesis until users show that they naturally share itineraries."
+        ],
+        metrics: [
+          "Time to reach a decision",
+          "Constraint adherence in the displayed results",
+          "User-reported confidence",
+          "Rate of constraint correction",
+          "Comparison of conversational input against guided filters"
+        ],
+        next: [
+          "Define a specific target segment and interview travelers about their current workflow.",
+          "Run a controlled comparison between conversational input and a well-designed filter flow.",
+          "Create a rubric to evaluate grounding and unsupported explanations.",
+          "Design a fallback when constraints are missing or misunderstood.",
+          "Explore real data access, AI cost, and a sustainable business model only after validating the core value."
+        ],
+        evidence: "The project is a concept and proposed evaluation plan. The comparison has not been run, so no performance advantage is claimed. Demo funnel interactions do not establish willingness to book.",
+        skills: ["AI guardrails", "Decision quality", "Hypothesis testing", "Risk analysis", "Experiment design"],
+        source: LINKS.tripwiseDoc, live: null, liveLabel: null
+      },
+
+      "spotify-social": {
+        number: "03", title: "Spotify: Social & UX",
+        category: "Product strategy · UX exploration",
+        status: "Early exploration",
+        tagline: "Exploring how social discovery, shared listening, and less disruptive free-tier experiences might improve the music experience.",
+        summary: "This early exploration proposes feature opportunities that connect personal listening with friends and examine friction in the free experience. It is a starting set of ideas, not a validated recommendation or a claim about Spotify's internal roadmap.",
+        problem: "The document explores two broad opportunity areas: making music discovery and shared listening more social, and reducing moments where free-tier prompts disrupt the listening experience. The scale and priority of these problems still need evidence.",
+        users: "Potentially free-tier listeners and people who discover music through friends. A narrower target segment needs to be chosen before validating solutions.",
+        hypothesis: "If listeners can more easily discover what friends play and participate in shared listening, some may find music discovery more engaging. If free-tier prompts are less disruptive, the listening experience may feel smoother. Both hypotheses require validation.",
+        decisions: [
+          ["Friends Activity hub", "Explore a dedicated place for seeing friends' listening activity and discovering music socially."],
+          ["QR-based connection", "Explore a simple way to connect with another listener through a scannable code."],
+          ["Broader Jam access", "Consider making collaborative listening more accessible to free users. This requires business and feasibility analysis."],
+          ["Artist updates and trends", "Explore artist news and trending songs as discovery surfaces. The value and freshness of the content need testing."],
+          ["Smoother free-tier experience", "Consider less intrusive Premium prompts and smoother scrolling. Trade-off: free-tier UX changes must be evaluated alongside monetization needs."]
+        ],
+        solution: [
+          "Group the opportunities into social discovery, collaborative listening, content discovery, and free-tier friction.",
+          "Choose one specific user problem instead of attempting all ideas together.",
+          "Compare the idea against existing Spotify workflows and alternative solutions.",
+          "Define the target behavior and a measurable hypothesis before proposing an MVP."
+        ],
+        risks: [
+          "The exploration does not establish how many users experience each pain point.",
+          "Social features introduce privacy, consent, and real-time synchronization considerations.",
+          "Artist news requires reliable, verified content sources.",
+          "Changing Premium prompts may create trade-offs with conversion and revenue.",
+          "Building several features at once would make it difficult to identify which change created value."
+        ],
+        metrics: [
+          "Discovery-to-play rate for social recommendations",
+          "Successful friend-connection rate",
+          "Participation in collaborative listening",
+          "User-reported interruption or frustration",
+          "Retention and Premium conversion as guardrail measures"
+        ],
+        next: [
+          "Choose one opportunity and a specific target segment.",
+          "Review existing user feedback and interview relevant listeners.",
+          "Compare alternative solutions and estimate effort and risks.",
+          "Prioritize an MVP using user value, confidence, effort, and business constraints.",
+          "Define success and guardrail metrics before testing."
+        ],
+        evidence: "The source document is marked as a draft / Day 1 exploration. These are proposed opportunities, not validated user needs or Spotify's internal product plans.",
+        skills: ["Feature ideation", "UX friction", "Prioritization", "Product hypotheses", "Success metrics"],
+        source: LINKS.spotifyDoc, live: null, liveLabel: null
+      },
+
+      "spotify-storybook": {
+        number: "04", title: "Spotify UI/UX Storybook",
+        category: "Prompt design · UX experiment",
+        status: "Prompt experiment",
+        tagline: "Using a reusable prompt to make early UX scenarios more concrete, while keeping generated stories separate from actual research.",
+        summary: "This experiment uses a product or feature, persona name, and location to draft a short, empathetic user story. It explores a lightweight way to make an experience more tangible during early design work.",
+        problem: "Early product concepts can stay abstract. A concrete scenario may help a team discuss the context in which a feature could be used. However, a generated story can also invent details and make assumptions look like user evidence.",
+        users: "The immediate audience is someone exploring a product or feature concept during early UX design. The experiment does not establish an independently validated end-user segment.",
+        hypothesis: "If a structured prompt turns a small product and persona brief into a clear scenario, it may help people discuss early design ideas more concretely. Its usefulness must be compared with real research notes and designer-written scenarios.",
+        decisions: [
+          ["Use structured inputs", "Provide the product or feature, persona, and location so the prompt has a consistent starting point."],
+          ["Generate an illustrative story", "Use the output to explore an experience rather than to claim a real user said or did something."],
+          ["Keep the scope small", "Treat it as a prompt experiment rather than a full product case study."],
+          ["Preserve evidence boundaries", "Check whether the generated scenario adds invented details that are absent from source research."]
+        ],
+        solution: [
+          "Enter a product or feature description.",
+          "Provide the persona name and location or context.",
+          "Generate a short, empathetic story about the possible experience.",
+          "Review the story critically and mark assumptions that need evidence."
+        ],
+        risks: [
+          "Generated personas and scenarios may reproduce stereotypes or add unsupported assumptions.",
+          "A polished story may be mistaken for actual user research.",
+          "The prompt's usefulness has not been established through a comparative test.",
+          "Outputs may vary across models and prompt changes."
+        ],
+        metrics: [
+          "Time needed to create a first scenario",
+          "Reviewer rating of clarity and usefulness",
+          "Number of unsupported assumptions in the output",
+          "Agreement between generated scenarios and source research",
+          "Revision effort before the scenario can be used"
+        ],
+        next: [
+          "Test the prompt on several clearly defined product scenarios.",
+          "Compare its output with scenarios written by people from the same brief.",
+          "Check whether each meaningful claim is supported by the input.",
+          "Compare generated stories with real interview notes without replacing those notes.",
+          "Document the cases where the prompt helps and where it introduces misleading assumptions."
+        ],
+        evidence: "This is a prompt/UX experiment. Generated stories are illustrative and do not replace interviews, observed behavior, or other user evidence.",
+        skills: ["Prompt design", "UX storytelling", "Persona scenarios", "Critical evaluation", "Evidence awareness"],
+        source: LINKS.storybookDoc, live: null, liveLabel: null
+      }
+    };
+
+    const app = document.getElementById("app");
+    const homePage = document.getElementById("homePage");
+    const projectPage = document.getElementById("projectPage");
+    const navWrap = document.getElementById("navWrap");
+    const navLinks = document.getElementById("navLinks");
+    const commandOverlay = document.getElementById("commandOverlay");
+    const commandInput = document.getElementById("commandInput");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function listHTML(items) {
+      return `<ul>${items.map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ul>`;
+    }
+
+    function decisionsHTML(items) {
+      return `<ul>${items.map(([title, detail]) =>
+        `<li><strong style="color:var(--text)">${escapeHTML(title)}:</strong> ${escapeHTML(detail)}</li>`
+      ).join("")}</ul>`;
+    }
+
+    function renderProject(slug) {
+      const p = PROJECTS[slug];
+      if (!p) {
+        projectPage.innerHTML = `
+          <section class="detail-page container">
+            <a class="back-link" href="#work">← Back to projects</a>
+            <h1>Project not found</h1>
+            <p class="muted">That project view doesn't exist. Head back to the work section.</p>
+          </section>`;
+        return;
+      }
+
+      const liveButton = p.live
+        ? `<a class="button" href="${escapeHTML(p.live)}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.liveLabel || "Open project ↗")}</a>`
+        : "";
+
+      projectPage.innerHTML = `
+        <section class="detail-page">
+          <div class="container">
+            <a class="back-link" href="#work">← Back to all projects</a>
+
+            <div class="detail-hero">
+              <span class="eyebrow">Project ${escapeHTML(p.number)} · ${escapeHTML(p.category)}</span>
+              <h1>${escapeHTML(p.title)}</h1>
+              <p>${escapeHTML(p.tagline)}</p>
+              <div class="detail-meta">
+                <span class="status">${escapeHTML(p.status)}</span>
+                <span class="status">Product thinking</span>
+                <span class="status">Evidence-led next steps</span>
+              </div>
+            </div>
+
+            <div class="detail-grid">
+              <div class="detail-main">
+                <article class="detail-block">
+                  <h2>01 / Context</h2>
+                  <p>${escapeHTML(p.summary)}</p>
+                </article>
+                <article class="detail-block">
+                  <h2>02 / Problem space</h2>
+                  <p>${escapeHTML(p.problem)}</p>
+                  <p><strong style="color:var(--text)">Target users:</strong> ${escapeHTML(p.users)}</p>
+                </article>
+                <article class="detail-block">
+                  <h2>03 / Product hypothesis</h2>
+                  <p>${escapeHTML(p.hypothesis)}</p>
+                </article>
+                <article class="detail-block">
+                  <h2>04 / Key product decisions and trade-offs</h2>
+                  ${decisionsHTML(p.decisions)}
+                </article>
+                <article class="detail-block">
+                  <h2>05 / Proposed solution and flow</h2>
+                  ${listHTML(p.solution)}
+                </article>
+                <article class="detail-block">
+                  <h2>06 / Risks and open questions</h2>
+                  ${listHTML(p.risks)}
+                </article>
+                <article class="detail-block">
+                  <h2>07 / Success metrics to test</h2>
+                  <p>These are proposed measurements, not results already achieved.</p>
+                  ${listHTML(p.metrics)}
+                </article>
+                <article class="detail-block">
+                  <h2>08 / Next steps</h2>
+                  ${listHTML(p.next)}
+                </article>
+                <article class="detail-block">
+                  <h2>09 / Current evidence status</h2>
+                  <div class="notice">${escapeHTML(p.evidence)}</div>
+                </article>
+              </div>
+
+              <aside class="detail-aside">
+                <div class="detail-aside-card">
+                  <h3>Project links</h3>
+                  <p>Open the original document to read the source case study or notes.</p>
+                  <a class="button secondary" href="${escapeHTML(p.source)}" target="_blank" rel="noopener noreferrer">Read original document ↗</a>
+                  ${liveButton}
+                </div>
+                <div class="detail-aside-card">
+                  <h3>What this work explores</h3>
+                  <div class="tag-row">${p.skills.map(skill => `<span class="tag">${escapeHTML(skill)}</span>`).join("")}</div>
+                </div>
+                <div class="detail-aside-card">
+                  <h3>My approach</h3>
+                  <p>Frame the problem, make decisions and trade-offs explicit, define what evidence would change the decision, and test the riskiest assumptions first.</p>
+                </div>
+                <div class="detail-aside-card">
+                  <h3>Continue exploring</h3>
+                  <p>Visit the rest of my projects or get in touch to discuss product thinking and AI.</p>
+                  <a class="button secondary" href="#work">More projects ↗</a>
+                  <a class="button secondary" href="#contact">Contact me ↗</a>
+                </div>
+              </aside>
+            </div>
+
+            <div class="detail-footer">
+              <a class="button" href="#work">← All projects</a>
+              <a class="button secondary" href="${escapeHTML(LINKS.linkedin)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a>
+            </div>
+          </div>
+        </section>`;
+    }
+
+    function closeMobileMenu() {
+      navLinks.classList.remove("open");
+      document.getElementById("menuToggle").setAttribute("aria-expanded", "false");
+    }
+
+    function navigate() {
+      const hash = window.location.hash || "#home";
+      const match = hash.match(/^#project\/([a-z0-9-]+)$/i);
+
+      if (match) {
+        homePage.classList.add("hidden");
+        projectPage.classList.remove("hidden");
+        renderProject(match[1]);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        projectPage.classList.add("hidden");
+        homePage.classList.remove("hidden");
+        requestAnimationFrame(() => {
+          if (hash !== "#home" && hash !== "#") {
+            const target = document.querySelector(hash);
+            if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+          observeReveals();
+        });
+      }
+      closeMobileMenu();
+      closeCommand();
+    }
+
+    window.addEventListener("hashchange", navigate);
+
+    // Filter cards by their categories.
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+        const filter = button.dataset.filter;
+        document.querySelectorAll(".project-card").forEach(card => {
+          const categories = (card.dataset.categories || "").split(" ");
+          const show = filter === "all" || categories.includes(filter);
+          card.classList.toggle("hidden", !show);
+          if (show) card.classList.remove("visible");
+        });
+        observeReveals();
+      });
+    });
+
+    // Theme toggle, with a remembered preference when local storage is available.
+    const themeToggle = document.getElementById("themeToggle");
+    let currentTheme = "dark";
+    try { currentTheme = localStorage.getItem("shantanu-theme") || "dark"; } catch (e) {}
+    document.documentElement.dataset.theme = currentTheme;
+    themeToggle.textContent = currentTheme === "dark" ? "☼" : "☾";
+
+    themeToggle.addEventListener("click", () => {
+      currentTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = currentTheme;
+      themeToggle.textContent = currentTheme === "dark" ? "☼" : "☾";
+      try { localStorage.setItem("shantanu-theme", currentTheme); } catch (e) {}
+    });
+
+    // Mobile navigation.
+    document.getElementById("menuToggle").addEventListener("click", event => {
+      const isOpen = navLinks.classList.toggle("open");
+      event.currentTarget.setAttribute("aria-expanded", String(isOpen));
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMobileMenu));
+
+    // Sticky navigation styling.
+    window.addEventListener("scroll", () => {
+      navWrap.classList.toggle("scrolled", window.scrollY > 16);
+    }, { passive: true });
+
+    // Reveal animations. Reduced-motion users see content immediately.
+    let revealObserver;
+    function observeReveals() {
+      if (revealObserver) revealObserver.disconnect();
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const elements = document.querySelectorAll(".reveal");
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        elements.forEach(el => el.classList.add("visible"));
+        return;
+      }
+      revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      elements.forEach(el => {
+        if (!el.classList.contains("visible")) revealObserver.observe(el);
+      });
+    }
+
+    // Optional, restrained desktop tilt for the hero visual.
+    const heroVisual = document.getElementById("heroVisual");
+    if (heroVisual && window.matchMedia("(pointer:fine)").matches &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      heroVisual.addEventListener("pointermove", event => {
+        const rect = heroVisual.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        heroVisual.style.transform = `perspective(900px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
+      });
+      heroVisual.addEventListener("pointerleave", () => {
+        heroVisual.style.transform = "";
+      });
+    }
+
+    // Command menu: click the icon or press Ctrl/Cmd + K.
+    function openCommand() {
+      commandOverlay.classList.add("open");
+      commandInput.value = "";
+      filterCommands("");
+      commandInput.focus();
+    }
+    function closeCommand() {
+      commandOverlay.classList.remove("open");
+    }
+    document.getElementById("commandOpen").addEventListener("click", openCommand);
+    commandOverlay.addEventListener("click", event => {
+      if (event.target === commandOverlay) closeCommand();
+    });
+    document.getElementById("commandList").querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", () => {
+        const destination = button.dataset.go;
+        closeCommand();
+        if (destination) window.location.hash = destination;
+      });
+    });
+    function filterCommands(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll("#commandList button").forEach(button => {
+        button.classList.toggle("hidden", !button.textContent.toLowerCase().includes(q));
+      });
+    }
+    commandInput.addEventListener("input", () => filterCommands(commandInput.value));
+    document.addEventListener("keydown", event => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        openCommand();
+      }
+      if (event.key === "Escape") closeCommand();
+    });
+
+    // Start at the current route, including direct links to a project.
+    navigate();
+    observeReveals();
+  </script>
+</body>
+</html>
